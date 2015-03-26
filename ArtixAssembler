@@ -300,7 +300,7 @@ def getMemoryValues(instructions, filename):
 				# Set bit representing the i bit
 				i = '0' if tokens[1]==0 else '1'
 
-			instruction1 = '000010' + i + r
+			instruction1 = '000100' + i + r
 			memorydict[offset+0] = instruction1
 			increment = 1
 		elif 'IN' in tokens and 'BEGIN' not in tokens:
@@ -319,7 +319,7 @@ def getMemoryValues(instructions, filename):
 				r = '0' if 'A' in tokens[2] else '1'
 				# Set bit representing the i bit
 				i = '0' if tokens[1]==0 else '1'
-			instruction1 = '000011' + i + r
+			instruction1 = '000101' + i + r
 			memorydict[offset+0] = instruction1
 			increment = 1
 		elif 'BCDO' in tokens:
@@ -330,7 +330,7 @@ def getMemoryValues(instructions, filename):
 			else :
 				# Set bit representing the register
 				r = '0' if 'A' in tokens[1] else '1'
-			instruction1 = '0100000' + r
+			instruction1 = '1111100' + r
 			memorydict[offset+0] = instruction1
 			increment = 1
 		elif 'DEB' in tokens:
@@ -423,13 +423,13 @@ def main(argv):
 			type = arg
 		elif opt in ('-h','--help'):
 			print '*======================================================*'
-			print '|                  Simple Assembler Help:              |'
+			print '|                  Artix Assembler Help:               |'
 			print '*======================================================*'
 			print 'This program is meant to be a simple assembler that takes'
 			print 'the input from a file and converts it to the machine code'
-			print 'for a simple micro-controller implementation in Verilog '
-			print 'on a Xilinx FPGA.'
-			print 'Target Python Version: 2.7'
+			print 'for a simple micro-controller implementation in VHDL '
+			print 'on a Xilinx Artix-7 FPGA.'
+			print 'Target Python Version: 2.7.6'
 			print ''
 			print 'Acceptable Arguments: '
 			print '\t-t or --type '
@@ -446,41 +446,30 @@ def main(argv):
 			print '\t\tdefines the name of the input file'
 			print '\t\tdefault is Instructions.dat'
 			print ''
-			print ' The Instructions implemented so far are listed bellow:'
-			print ' Instruction   ->  Encoding'
-			print '----------------|-------------------'
-			print ' Load M,R 		-> 000000pr, mmmmmmmm'
-			print ' STOR R,M 		-> 000001pr, mmmmmmmm'
-			print ' ADD R 			-> 1000000r '
-			print ' SUB R 			-> 1001000r'
-			print ' LSL R 			-> 1010000r '
-			print ' LSR R 			-> 1011000r '
-			print ' XOR R 			-> 1100000r'
-			print ' COM R 			-> 1101000r'
-			print ' NEG R 			-> 1110000r '
-			print ' CLR R 			-> 1111000r'
-			print ' OUT R,P 		-> 000010ir'
-			print ' IN P,R 		-> 000011ir'
-			print ' BCDO R 		-> 0100000r'
-			print ' DEB i,R 		-> 001000ir'
-			print ' BZ M 			-> 001100p0, mmmmmmmm'
-			print ' LDX K 		-> 000111p0, kkkkkkkk'
-			print ' JMPX R 		-> 0101000r'
+			print ' The Instructions implemented so far are listed below:'
+			print 'Instruction 	 | Encoding 		 |'
+			print '--------------|:-----------------:|'
+			print 'Load M,R 	 |000000pr, mmmmmmmm |'
+			print 'STOR R,M 	 |000001pr, mmmmmmmm |'
+			print 'ADD R 		 |1000000r           |'
+			print 'SUB R 		 |1001000r           |'
+			print 'LSL R 		 |1010000r           |'
+			print 'LSR R 		 |1011000r           |'
+			print 'XOR R 		 |1100000r           |'
+			print 'COM R 		 |1101000r           |'
+			print 'NEG R 		 |1110000r           |'
+			print 'CLR R 		 |1111000r           |'
+			print 'OUT R,P 	 	 |000100ir           |'
+			print 'IN P,R 	 	 |000101ir           |'
+			print 'BCDO R      	 |1111100r           |'
+			print 'BNZ M       	 |000100p0, mmmmmmmm |'
 			print ''
-			print ' Author: Jesse Millwood'
-			print ' April 2014'
+			print ' Author: Jesse Millwood, Joe Gibson'
+			print ' April 2014 - April 2015'
 			sys.exit(0)
-
-
-
 
 	readfile(inFILE, outFILE, type)
 	print 'Successful Conversion'
-
-
-
-
-
 
 if __name__ == '__main__':
 	main(sys.argv[1:])
