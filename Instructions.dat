@@ -1,28 +1,31 @@
-;Initialize Memory Location Values
-10:1
-11:5
-18:35
-19:103
+DATA
+    [10] = 0x01
+    [11] = 0x05
+    [18] = 0x8A
+    [19] = 0x39
+END DATA
 
-BEGIN:0
-CLR A
-LOAD 10,A
-OUT A
-LSL A
-OUT A
-LOAD 11,B
-ADD A
-OUT A
+SECTIONS
+    Test1 = 0
+    Test2 = 20
+END SECTIONS
 
-LOAD 18,A
-BCDO A
-LOAD 19,B
-BCDO B
+Test1:
+    CLR A
+    LOAD 10, A
+    OUT A
+    LSL A
+    OUT A
+    LOAD 11, B
+    ADD A
+    OUT A
+    LOAD 18, A
+    BCDO A
+    LOAD 19, B
+    BCDO B
 
-LOAD 11,A
-LOAD 10,B
-SUB A
-OUT A
-BNZ 24
-LOAD 18,A
-OUT A
+Test2:
+    LOAD 18,A
+    BCDO A
+    LOAD 19,B
+    BCDO B
